@@ -1,5 +1,7 @@
 package com.example.ventevoiture01.Repository;
 
+import java.util.ArrayList;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,5 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AnnonceJPA extends JpaRepository<Annonce, Integer> {
-
+    @Modifying
+    @Transactional
+    @Query("UPDATE Annonce a SET a.status_voiture = :status_voiture WHERE a.id = :id")
+    void updateStatus(@Param("id") int id, @Param("status_voiture") String status_voiture);
 }

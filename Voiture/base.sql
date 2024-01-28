@@ -101,3 +101,8 @@ create table vente(
     foreign key(id_vendeur) references employer(id),
     foreign key(id_client) references employer(id)
 );
+//meilleur vendeur;
+SELECT id_vendeur, COUNT(*) AS nombre_ventes
+FROM vente
+GROUP BY id_vendeur
+ORDER BY nombre_ventes DESC;

@@ -7,34 +7,32 @@ import org.springframework.stereotype.Service;
 import com.example.ventevoiture01.Models.Vente;
 import com.example.ventevoiture01.Models.Employer;
 import com.example.ventevoiture01.Models.Vente;
-import com.example.ventevoiture01.Models.MeilleureVente;
 import com.example.ventevoiture01.Repository.VenteJPA;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class VenteService {
     @Autowired
-    private VenteJPA venteRepository;
+    private VenteJPA VenteRepository;
 
     public List<Vente> getAllVentes() {
-        return venteRepository.findAll();
+        return VenteRepository.findAll();
     }
 
     public Optional<Vente> getVenteById(int id) {
-        return venteRepository.findById(id);
+        return VenteRepository.findById(id);
     }
 
     public Vente createVente(Vente Vente) {
-        return venteRepository.save(Vente);
+        return VenteRepository.save(Vente);
     }
 
     public Vente updateVente(int id, Vente updatedVente) {
-        if (venteRepository.existsById(id)) {
+        if (VenteRepository.existsById(id)) {
             updatedVente.setId(id);
-            return venteRepository.save(updatedVente);
+            return VenteRepository.save(updatedVente);
         } else {
             // Gérer le cas où le Vente avec l'ID spécifié n'est pas trouvé
             return null;
@@ -42,12 +40,12 @@ public class VenteService {
     }
 
     public void deleteVente(int id) {
-        venteRepository.deleteById(id);
+        VenteRepository.deleteById(id);
     }
 
     public ArrayList<Vente> getVenteByUtilisateur(Employer employer) {
         ArrayList<Vente> result = new ArrayList<Vente>();
-        List<Vente> annonces = venteRepository.findAll();
+        List<Vente> annonces = VenteRepository.findAll();
         for (Vente ann : annonces) {
             if (ann.getVendeur().getId() == employer.getId()) {
                 result.add(ann);
@@ -56,11 +54,7 @@ public class VenteService {
         return result;
     }
 
-    public List<MeilleureVente> countVentesParVendeur() {
-        List<Object[]> results = venteRepository.countVentesParVendeur();
-
-        return results.stream()
-                .map(result -> new MeilleureVente((Long) result[0], (Long) result[1]))
-                .collect(Collectors.toList());
+    public List<Vente> getVenteStat() {
+        return VenteRepository.countVentesParVendeur();
     }
 }
