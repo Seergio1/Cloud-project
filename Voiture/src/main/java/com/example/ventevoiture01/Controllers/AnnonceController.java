@@ -33,7 +33,7 @@ public class AnnonceController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/annonces/create")
+    @PostMapping("/annonce/create")
     public ResponseEntity<Annonce> createAnnonce(@RequestBody Annonce annonce) {
         Annonce createdAnnonce = annonceService.createAnnonce(annonce);
         return new ResponseEntity<>(createdAnnonce, HttpStatus.CREATED);
