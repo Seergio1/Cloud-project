@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.ventevoiture01.Models.Commission;
 
-import jakarta.websocket.server.PathParam;
-
 @Repository
 public interface CommissionJPA extends JpaRepository<Commission, Integer> {
     @Query("SELECT c FROM Commission c WHERE c.annonce.id_annonce = :annonceId")
