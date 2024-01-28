@@ -90,7 +90,7 @@ public class AnnonceController {
 
         try {
             Employer utilisateur = employeeRepository.getEmployerById(utilisateurId);
-            Annonce annonce = annonceRepository.findByid_annonce(annonceId);
+            Annonce annonce = annonceRepository.findById_annonce(annonceId);
             Annonce_Favoris createdAnnonce = annonceService.createAnnonceFavoris(annonce, utilisateur);
         } catch (Exception e) {
             e.printStackTrace();
