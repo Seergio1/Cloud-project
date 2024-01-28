@@ -4,10 +4,10 @@ public class MeilleureVente {
     private Long idVendeur;
     private Long nombreVentes;
 
-    public VenteCountDTO() {
+    public MeilleureVente() {
     }
 
-    public VenteCountDTO(Long idVendeur, Long nombreVentes) {
+    public MeilleureVente(Long idVendeur, Long nombreVentes) {
         this.idVendeur = idVendeur;
         this.nombreVentes = nombreVentes;
     }
