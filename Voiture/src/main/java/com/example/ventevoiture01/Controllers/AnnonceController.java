@@ -79,18 +79,16 @@ public class AnnonceController {
         }
     }
 
-   @Autowired
+@Autowired
     EmployerRepository employeeRepository;
-    AnnonceJPA annonceRepository;
 
-
-    @PostMapping("/annonce/favoris/create/annonce/{annonceId}/utilisateur/{utilisateurId}")
-    public void insertAnnonceFavorisByUtilisateur(@PathVariable int annonceId,
+    @PostMapping("/annonce/favoris/byUtilisateur/{utilisateurId}")
+    public void insertAnnonceFavorisByUtilisateur(@RequestBody Annonce annonce,
             @PathVariable long utilisateurId) throws Exception {
 
         try {
             Employer utilisateur = employeeRepository.getEmployerById(utilisateurId);
-            Annonce annonce = annonceRepository.getAnnonceById(annonceId);
+
             Annonce_Favoris createdAnnonce = annonceService.createAnnonceFavoris(annonce, utilisateur);
         } catch (Exception e) {
             new Exception("insert failed: " + e.getMessage());
