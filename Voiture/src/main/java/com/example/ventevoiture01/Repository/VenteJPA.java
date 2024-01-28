@@ -10,6 +10,7 @@ import com.example.ventevoiture01.Models.Vente;
 
 @Repository
 public interface VenteJPA extends JpaRepository<Vente, Integer> {
+    
     @Query(value = "SELECT id_vendeur, COUNT(*) AS nombre_ventes " +
             "FROM vente " +
             "GROUP BY id_vendeur " +
