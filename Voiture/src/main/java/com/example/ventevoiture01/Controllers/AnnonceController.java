@@ -82,7 +82,7 @@ public class AnnonceController {
     @Autowired
     EmployerRepository employeeRepository;
     
-    @PostMapping("favoris/byUtilisateur/{utilisateurId}")
+    @PostMapping("annonce/favoris/create/utilisateur/{utilisateurId}")
     public void insertAnnonceFavorisByUtilisateur(@RequestBody Annonce annonce,
             @PathVariable long utilisateurId) throws Exception {
 
