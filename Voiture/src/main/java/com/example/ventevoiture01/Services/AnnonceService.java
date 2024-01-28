@@ -91,6 +91,10 @@ public class AnnonceService {
         return result;
     }
 
+    public List<MeilleureAnnonce> countFavorisByAnnonce() {
+        return annonceFavorisJPA.countFavorisByAnnonce();
+    }
+    
     public Annonce_Favoris createAnnonceFavoris(Annonce annonce, Employer employer) {
         Annonce_Favoris annonceFavoris = new Annonce_Favoris(annonce, employer);
         return annonceFavorisJPA.save(annonceFavoris);
