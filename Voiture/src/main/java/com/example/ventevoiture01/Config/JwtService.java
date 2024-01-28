@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.crypto.SecretKey;
 
-import com.example.ventevoiture01.Models.Role;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
