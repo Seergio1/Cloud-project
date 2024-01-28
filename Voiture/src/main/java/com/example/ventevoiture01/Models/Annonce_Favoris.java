@@ -11,7 +11,7 @@ public class Annonce_Favoris {
     @JoinColumn(name = "id_annonce")
     Annonce annonce;
     @ManyToOne
-    @JoinColumn(name = "id_employer")
+    @JoinColumn(name = "id_utilisateur")
     Employer employer;
 
     public Annonce_Favoris(int id, Annonce annonce, Employer employer) {
