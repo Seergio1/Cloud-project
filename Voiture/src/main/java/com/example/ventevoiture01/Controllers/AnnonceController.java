@@ -95,6 +95,7 @@ public class AnnonceController {
         }
 
     }
+    
 
     @PutMapping("/annonce/update/status/{id}")
     public ResponseEntity<Annonce> updateStatusVoiture(@PathVariable int id, @RequestBody Annonce annonce) {
