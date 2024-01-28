@@ -1,10 +1,12 @@
 package com.example.ventevoiture01.Services;
 
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.ventevoiture01.Models.Vente;
 import com.example.ventevoiture01.Models.Employer;
+import com.example.ventevoiture01.Models.Vente;
 import com.example.ventevoiture01.Repository.VenteJPA;
 import java.util.List;
 import java.util.ArrayList;
@@ -50,5 +52,9 @@ public class VenteService {
             }
         }
         return result;
+    }
+
+    public List<Vente> getVenteStat() {
+        return VenteRepository.countVentesParVendeur();
     }
 }
