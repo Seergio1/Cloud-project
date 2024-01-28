@@ -3,7 +3,7 @@ package com.example.ventevoiture01.Controllers;
 import com.example.ventevoiture01.Models.Annonce;
 import com.example.ventevoiture01.Models.Annonce_Favoris;
 import com.example.ventevoiture01.Models.Employer;
-import com.example.ventevoiture01.Models.MeilleureAnnonce
+import com.example.ventevoiture01.Models.MeilleureAnnonce;
 import com.example.ventevoiture01.Repository.*;
 import com.example.ventevoiture01.Services.AnnonceService;
 import com.example.ventevoiture01.Services.EmployerService;
