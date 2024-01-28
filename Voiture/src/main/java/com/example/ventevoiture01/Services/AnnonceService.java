@@ -93,7 +93,10 @@ public class AnnonceService {
     }
 
     public List<MeilleureAnnonce> countFavorisByAnnonce() {
-        return annonceFavorisJPA.countFavorisByAnnonce();
+        List<Object[]> results = annonceFavorisJPA.countFavorisByAnnonce();
+        return results.stream()
+                .map(result -> new MeilleureAnnonce((Annonce) result[0], (Long) result[1]))
+                .collect(Collectors.toList());
     }
     
     public Annonce_Favoris createAnnonceFavoris(Annonce annonce, Employer employer) {
