@@ -3,7 +3,8 @@ package com.example.ventevoiture01.Controllers;
 import com.example.ventevoiture01.Models.Annonce;
 import com.example.ventevoiture01.Models.Annonce_Favoris;
 import com.example.ventevoiture01.Models.Employer;
-import com.example.ventevoiture01.Repository.EmployerRepository;
+import com.example.ventevoiture01.Models.MeilleureAnnonce;
+import com.example.ventevoiture01.Repository.*;
 import com.example.ventevoiture01.Services.AnnonceService;
 import com.example.ventevoiture01.Services.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +34,7 @@ public class AnnonceController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/annonces/create")
+    @PostMapping("/annonce/create")
     public ResponseEntity<Annonce> createAnnonce(@RequestBody Annonce annonce) {
         Annonce createdAnnonce = annonceService.createAnnonce(annonce);
         return new ResponseEntity<>(createdAnnonce, HttpStatus.CREATED);
@@ -79,11 +79,11 @@ public class AnnonceController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    
     @Autowired
     EmployerRepository employeeRepository;
-
-    @PostMapping("/annonce/favoris/create/utilisateur/{utilisateurId}")
+    
+    @PostMapping("annonce/favoris/create/utilisateur/{utilisateurId}")
     public void insertAnnonceFavorisByUtilisateur(@RequestBody Annonce annonce,
             @PathVariable long utilisateurId) throws Exception {
 
@@ -95,6 +95,11 @@ public class AnnonceController {
             new Exception("insert failed: " + e.getMessage());
         }
 
+    }
+
+    @GetMapping("/annonce/meilleure")
+    public List<MeilleureAnnonce> countFavorisByAnnonce() {
+        return annonceService.countFavorisByAnnonce();
     }
 
     @PutMapping("/annonce/update/status/{id}")
@@ -113,12 +118,6 @@ public class AnnonceController {
     @GetMapping("/annonce/etat/{etat}")
     public ResponseEntity<List<Annonce>> getAnnoncesByEtat(@PathVariable String etat) {
         List<Annonce> annonces = annonceService.getAnnonceByEtat(etat);
-        return new ResponseEntity<>(annonces, HttpStatus.OK);
-    }
-
-    @GetMapping("/annonce/getVoitureVenduByModele")
-    public ResponseEntity<ArrayList> getAnnoncesByModele() {
-        ArrayList annonces = annonceService.getVoitureVendusByModele();
         return new ResponseEntity<>(annonces, HttpStatus.OK);
     }
 }

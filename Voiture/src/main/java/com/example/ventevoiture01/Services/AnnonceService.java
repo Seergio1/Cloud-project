@@ -1,23 +1,19 @@
+
 package com.example.ventevoiture01.Services;
 
 import com.example.ventevoiture01.Models.Annonce;
 import com.example.ventevoiture01.Models.Annonce_Favoris;
 import com.example.ventevoiture01.Models.Employer;
-import com.example.ventevoiture01.Models.Modele;
-import com.example.ventevoiture01.Models.Voiture;
+import com.example.ventevoiture01.Models.MeilleureAnnonce;
 import com.example.ventevoiture01.Repository.AnnonceFavorisJPA;
 import com.example.ventevoiture01.Repository.AnnonceJPA;
-import com.example.ventevoiture01.Repository.ModeleJPA;
-import com.example.ventevoiture01.Repository.VoitureJPA;
-
-import ch.qos.logback.core.model.Model;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class AnnonceService {
@@ -73,28 +69,6 @@ public class AnnonceService {
         return result;
     }
 
-    @Autowired
-    ModeleJPA modeleJPA;
-
-    public ArrayList getVoitureVendusByModele() {
-        ArrayList<Voiture> vendu = new ArrayList<Voiture>();
-        ArrayList result = new ArrayList<>();
-        List<Annonce> temp;
-        List<Annonce> annonces = annonceRepository.findAll();
-        List<Modele> models = modeleJPA.findAll();
-        for (Modele model : models) {
-            temp = new ArrayList<Annonce>();
-            for (Annonce ann : annonces) {
-                if (ann.getStatus_voiture().compareTo("1") == 0
-                        && ann.getVoiture().getMarque().getNom().compareTo(model.getNom()) == 0) {
-                    temp.add(ann);
-                }
-            }
-            result.add(temp);
-        }
-        return result;
-    }
-
     public List<Annonce> getAnnonceByEtat(String employer) {
         List<Annonce> result = new ArrayList<Annonce>();
         List<Annonce> annonces = annonceRepository.findAll();
@@ -120,6 +94,13 @@ public class AnnonceService {
         return result;
     }
 
+    public List<MeilleureAnnonce> countFavorisByAnnonce() {
+        List<Object[]> results = annonceFavorisJPA.countFavorisByAnnonce();
+        return results.stream()
+                .map(result -> new MeilleureAnnonce((Annonce) result[0], (Long) result[1]))
+                .collect(Collectors.toList());
+    }
+    
     public Annonce_Favoris createAnnonceFavoris(Annonce annonce, Employer employer) {
         Annonce_Favoris annonceFavoris = new Annonce_Favoris(annonce, employer);
         return annonceFavorisJPA.save(annonceFavoris);
