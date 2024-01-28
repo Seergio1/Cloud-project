@@ -16,5 +16,5 @@ public interface AnnonceJPA extends JpaRepository<Annonce, Integer> {
     @Query("UPDATE Annonce a SET a.status_voiture = :status_voiture WHERE a.id = :id")
     void updateStatus(@Param("id") int id, @Param("status_voiture") String status_voiture);
 
-     Annonce getAnnonceById_annonce(int id_annonce);
+     Annonce getAnnonceById_annonce(int id_annonce); 
 }
