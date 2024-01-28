@@ -11,6 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AnnonceJPA extends JpaRepository<Annonce, Integer> {
-     Annonce findById_annonce(int id_annonce);
 
 }
