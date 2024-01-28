@@ -39,7 +39,7 @@ public class AnnonceService {
             updatedAnnonce.setId_annonce(id);
             return annonceRepository.save(updatedAnnonce);
         } else {
-            // Gérer le cas où l'annonce avec l'ID spécifié n'est pas trouvée
+            
             return null;
         }
     }
@@ -81,6 +81,28 @@ public class AnnonceService {
         return result;
     }
 
+    @Autowired
+    ModeleJPA modeleJPA;
+
+    public ArrayList getVoitureVendusByModele() {
+        ArrayList<Voiture> vendu = new ArrayList<Voiture>();
+        ArrayList result = new ArrayList<>();
+        List<Annonce> temp;
+        List<Annonce> annonces = annonceRepository.findAll();
+        List<Modele> models = modeleJPA.findAll();
+        for (Modele model : models) {
+            temp = new ArrayList<Annonce>();
+            for (Annonce ann : annonces) {
+                if (ann.getStatus_voiture().compareTo("1") == 0
+                        && ann.getVoiture().getMarque().getNom().compareTo(model.getNom()) == 0) {
+                    temp.add(ann);
+                }
+            }
+            result.add(temp);
+        }
+        return result;
+    }
+    
     @Autowired
     AnnonceFavorisJPA annonceFavorisJPA;
 
