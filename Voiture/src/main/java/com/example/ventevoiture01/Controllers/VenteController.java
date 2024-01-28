@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ventevoiture01.Models.Vente;
 import com.example.ventevoiture01.Models.Employer;
+import com.example.ventevoiture01.Models.MeilleureVente;
 import com.example.ventevoiture01.Services.VenteService;
 import com.example.ventevoiture01.Services.EmployerService;
 import java.util.List;
@@ -73,8 +74,7 @@ public class VenteController {
     }
 
     @GetMapping("/vente/meilleurvendeur")
-    public List<Vente> getVenteStat() {
-        return VenteService.getVenteStat();
-
+    public List<MeilleureVente> countVentesParVendeur() {
+        return VenteService.countVentesParVendeur();
     }
 }
