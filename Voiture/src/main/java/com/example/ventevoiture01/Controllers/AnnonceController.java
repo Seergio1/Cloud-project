@@ -86,17 +86,19 @@ public class AnnonceController {
 
     @PostMapping("/annonce/favoris/create/annonce/{annonceId}/utilisateur/{utilisateurId}")
     public void insertAnnonceFavorisByUtilisateur(@PathVariable int annonceId,
-                                                  @PathVariable long utilisateurId) throws Exception {
+                                              @PathVariable long utilisateurId) {
 
         try {
             Employer utilisateur = employeeRepository.getEmployerById(utilisateurId);
             Annonce annonce = annonceRepository.findByid_annonce(annonceId);
             Annonce_Favoris createdAnnonce = annonceService.createAnnonceFavoris(annonce, utilisateur);
         } catch (Exception e) {
-            new Exception("insert failed: " + e.getMessage());
+            e.printStackTrace();
+            
+            throw new RuntimeException("Insert failed: " + e.getMessage());
         }
-
     }
+
     
 
     @PutMapping("/annonce/update/status/{id}")
