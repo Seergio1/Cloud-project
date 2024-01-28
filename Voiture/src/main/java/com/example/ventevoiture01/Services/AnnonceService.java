@@ -7,6 +7,7 @@ import com.example.ventevoiture01.Models.Employer;
 import com.example.ventevoiture01.Models.MeilleureAnnonce;
 import com.example.ventevoiture01.Repository.AnnonceFavorisJPA;
 import com.example.ventevoiture01.Repository.AnnonceJPA;
+import com.example.ventevoiture01.Repository.ModeleJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
