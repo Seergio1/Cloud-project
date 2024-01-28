@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.ventevoiture01.ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.241 s -- in com.example.ventevoiture01.ApplicationTests
