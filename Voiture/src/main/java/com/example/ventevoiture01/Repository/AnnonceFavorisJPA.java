@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface AnnonceFavorisJPA extends JpaRepository<Annonce_Favoris, Integer> {
   @Query(value = "SELECT a, COUNT(*) AS favorisCount " +
-            "FROM AnnonceFavoris af " +
+            "FROM Annonce_Favoris af " +
             "JOIN af.annonce a " +
             "GROUP BY a " +
             "ORDER BY favorisCount DESC")
