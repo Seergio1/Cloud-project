@@ -71,4 +71,10 @@ public class VenteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/vente/meilleurvendeur")
+    public List<Vente> getVenteStat() {
+        return VenteService.getVenteStat();
+
+    }
 }
