@@ -99,7 +99,7 @@ public class AnnonceController {
 
     @GetMapping("/annonce/meilleure")
     public List<MeilleureAnnonce> countFavorisByAnnonce() {
-        return annonceFavorisService.countFavorisByAnnonce();
+        return annonceService.countFavorisByAnnonce();
     }
 
     @PutMapping("/annonce/update/status/{id}")
