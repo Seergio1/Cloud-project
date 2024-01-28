@@ -16,6 +16,6 @@ public interface AnnonceFavorisJPA extends JpaRepository<Annonce_Favoris, Intege
             "FROM Annonce_Favoris af " +
             "JOIN af.annonce a " +
             "GROUP BY a " +
-            "ORDER BY favorisCount DESC")
-    List<MeilleureAnnonce> countFavorisByAnnonce();
+            "ORDER BY favorisCount DESC LIMIT 3")
+    List<Object[]> countFavorisByAnnonce();
 }
