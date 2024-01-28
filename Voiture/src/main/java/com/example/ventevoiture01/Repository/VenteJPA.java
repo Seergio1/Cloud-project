@@ -16,4 +16,5 @@ public interface VenteJPA extends JpaRepository<Vente, Integer> {
             "GROUP BY id_vendeur " +
             "ORDER BY nombre_ventes DESC", nativeQuery = true)
     List<Vente> countVentesParVendeur();
+    
 }
