@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.ventevoiture01.Models.Vente;
 import com.example.ventevoiture01.Models.Employer;
 import com.example.ventevoiture01.Models.Vente;
+import com.example.ventevoiture01.Models.MeilleureVente;
 import com.example.ventevoiture01.Repository.VenteJPA;
 import java.util.List;
 import java.util.ArrayList;
@@ -54,7 +55,11 @@ public class VenteService {
         return result;
     }
 
-    public List<Vente> getVenteStat() {
-        return venteRepository.countVentesParVendeur();
+    public List<MeilleureVente> countVentesParVendeur() {
+        List<Object[]> results = venteRepository.countVentesParVendeur();
+
+        return results.stream()
+                .map(result -> new MeilleureVente((Long) result[0], (Long) result[1]))
+                .collect(Collectors.toList());
     }
 }
