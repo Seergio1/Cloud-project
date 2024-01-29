@@ -58,7 +58,7 @@ public class VenteService {
         return result;
     }
 
-    public List<MeilleureVente> countVentesParVendeur() {
+      public List<MeilleureVente> countVentesParVendeur() {
         List<Object[]> results = venteRepository.countVentesParVendeur();
 
         return results.stream()
@@ -66,7 +66,9 @@ public class VenteService {
                     Long vendeurId = (Long) result[0];
                     Long nombreVentes = (Long) result[1];
 
-                    Employer vendeur = employerRepository.findEmployerById(vendeurId);
+                    Optional<Employer> optionalEmployer = employerRepository.findEmployerById(vendeurId);
+
+                    Employer vendeur = optionalEmployer.orElse(null);
 
                     return new MeilleureVente(vendeur, nombreVentes);
                 })
