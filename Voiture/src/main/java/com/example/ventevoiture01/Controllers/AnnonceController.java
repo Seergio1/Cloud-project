@@ -54,6 +54,13 @@ public class AnnonceController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/annonce/valider/{id}")
+    public ResponseEntity<Annonce> valider(@PathVariable int id){
+        Annonce updatedAnnonce = annonceService.valider(id);
+        return updatedAnnonce != null ? new ResponseEntity<>(updatedAnnonce, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
     @Autowired
     private EmployerService employerService;
 
