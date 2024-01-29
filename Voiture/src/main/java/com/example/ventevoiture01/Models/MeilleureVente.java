@@ -1,23 +1,23 @@
 package com.example.ventevoiture01.Models;
 
 public class MeilleureVente {
-    private Long idVendeur;
+    private Employer vendeur;
     private Long nombreVentes;
 
     public MeilleureVente() {
     }
 
-    public MeilleureVente(Long idVendeur, Long nombreVentes) {
-        this.idVendeur = idVendeur;
+    public MeilleureVente(Vendeur vendeur, Long nombreVentes) {
+        this.vendeur = vendeur;
         this.nombreVentes = nombreVentes;
     }
 
-    public Long getIdVendeur() {
-        return idVendeur;
+    public Vendeur getVendeur() {
+        return vendeur;
     }
 
-    public void setIdVendeur(Long idVendeur) {
-        this.idVendeur = idVendeur;
+    public void setVendeur(Vendeur vendeur) {
+        this.vendeur = vendeur;
     }
 
     public Long getNombreVentes() {
