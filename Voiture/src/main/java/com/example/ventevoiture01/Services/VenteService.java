@@ -61,9 +61,12 @@ public class VenteService {
 
         return results.stream()
                 .map(result -> {
-                    Employer employer = (Employer) result[0];
+                    Long vendeurId = (Long) result[0];
                     Long nombreVentes = (Long) result[1];
-                    return new MeilleureVente(employer, nombreVentes);
+
+                    Employer vendeur = employeeRepository.findEmployerById(vendeurId);
+
+                    return new MeilleureVente(vendeur, nombreVentes);
                 })
                 .collect(Collectors.toList());
     }
