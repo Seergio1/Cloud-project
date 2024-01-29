@@ -13,6 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface AnnonceJPA extends JpaRepository<Annonce, Integer> {
   @Modifying
     @Transactional
-    @Query("UPDATE Annonce a SET a.etat_annonce= 1 WHERE a.id_annonce = :id")
+    @Query("UPDATE Annonce a SET a.etat_annonce= '1' WHERE a.id_annonce = :id")
     Annonce valider(@Param("id") int id);
 }
