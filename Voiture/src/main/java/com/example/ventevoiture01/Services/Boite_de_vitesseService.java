@@ -26,6 +26,10 @@ public class Boite_de_vitesseService {
         return Boite_de_VitesseRepository.save(Boite_de_Vitesse);
     }
 
+    public void deleteBoiteDeVitesse(int id) {
+        Boite_de_VitesseRepository.deleteById(id);
+    }
+
     public Boite_de_Vitesse updateBoite_de_Vitesse(int id, Boite_de_Vitesse updatedBoite_de_Vitesse) {
         if (Boite_de_VitesseRepository.existsById(id)) {
             updatedBoite_de_Vitesse.setId(id);
