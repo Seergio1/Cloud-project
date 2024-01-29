@@ -145,6 +145,6 @@ public class AnnonceService {
     }
 
     public void valider(int id) {
-            return annonceRepository.valider(id);
+            annonceRepository.valider(id);
       }
 }
