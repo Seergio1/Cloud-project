@@ -28,7 +28,7 @@ public class Image {
         return idAnnonce;
     }
 
-    public void setIdVoiture(int idAnnonce) {
+    public void setIdAnnonce(int idAnnonce) {
         this.idAnnonce = idAnnonce;
     }
 
