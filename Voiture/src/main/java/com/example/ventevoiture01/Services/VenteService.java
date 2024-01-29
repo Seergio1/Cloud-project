@@ -8,7 +8,7 @@ import com.example.ventevoiture01.Models.Vente;
 import com.example.ventevoiture01.Models.Employer;
 import com.example.ventevoiture01.Models.Vente;
 import com.example.ventevoiture01.Models.MeilleureVente;
-import com.example.ventevoiture01.Repository.VenteJPA;
+import com.example.ventevoiture01.Repository.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
