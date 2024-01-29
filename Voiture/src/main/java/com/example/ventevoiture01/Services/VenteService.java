@@ -60,7 +60,11 @@ public class VenteService {
         List<Object[]> results = venteRepository.countVentesParVendeur();
 
         return results.stream()
-                .map(result -> new MeilleureVente((Employer) result[0], (Long) result[1]))
+                .map(result -> {
+                    Employer employer = (Employer) result[0];
+                    Long nombreVentes = (Long) result[1];
+                    return new MeilleureVente(employer, nombreVentes);
+                })
                 .collect(Collectors.toList());
     }
 }
