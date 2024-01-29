@@ -54,7 +54,7 @@ public class AnnonceController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/annonce/valider/{id}")
+    @PutMapping("/annonce/valider/{id}")
     public ResponseEntity<Annonce> valider(@PathVariable int id){
         annonceService.valider(id);
         Optional<Annonce> annonce = annonceService.getAnnonceById(id);
