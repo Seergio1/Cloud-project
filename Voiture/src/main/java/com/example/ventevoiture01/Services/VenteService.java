@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 public class VenteService {
     @Autowired
     private VenteJPA venteRepository;
-
+    @Autowired
+    private EmployerRepository employerRepository;
+    
     public List<Vente> getAllVentes() {
         return venteRepository.findAll();
     }
@@ -64,7 +66,7 @@ public class VenteService {
                     Long vendeurId = (Long) result[0];
                     Long nombreVentes = (Long) result[1];
 
-                    Employer vendeur = employeeRepository.findEmployerById(vendeurId);
+                    Employer vendeur = employerRepository.findEmployerById(vendeurId);
 
                     return new MeilleureVente(vendeur, nombreVentes);
                 })
