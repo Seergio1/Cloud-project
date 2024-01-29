@@ -7,16 +7,16 @@ public class MeilleureVente {
     public MeilleureVente() {
     }
 
-    public MeilleureVente(Vendeur vendeur, Long nombreVentes) {
+    public MeilleureVente(Employer vendeur, Long nombreVentes) {
         this.vendeur = vendeur;
         this.nombreVentes = nombreVentes;
     }
 
-    public Vendeur getVendeur() {
+    public Employer getVendeur() {
         return vendeur;
     }
 
-    public void setVendeur(Vendeur vendeur) {
+    public void setVendeur(Employer vendeur) {
         this.vendeur = vendeur;
     }
 
