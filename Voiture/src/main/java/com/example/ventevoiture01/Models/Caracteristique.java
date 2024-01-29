@@ -2,6 +2,8 @@ package com.example.ventevoiture01.Models;
 
 import jakarta.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Caracteristique {
     @Id
@@ -22,41 +24,9 @@ public class Caracteristique {
     @ManyToOne
     @JoinColumn(name = "id_couleur")
     Couleur couleur;
-
-    public Caracteristique(int id_caracteristique, Voiture voiture, Moteur moteur, Boite_de_Vitesse boite_de_vitesse,
-            Carburant carburant, Couleur couleur, double kilometrage, int annee, int puissance) {
-        this.id_caracteristique = id_caracteristique;
-        this.voiture = voiture;
-        this.moteur = moteur;
-        this.boite_de_vitesse = boite_de_vitesse;
-        this.carburant = carburant;
-        this.couleur = couleur;
-        this.kilometrage = kilometrage;
-        this.annee = annee;
-        this.puissance = puissance;
-    }
-
-    @Override
-    public String toString() {
-        return "Caracteristique [id_caracteristique=" + id_caracteristique + ", voiture=" + voiture + ", moteur="
-                + moteur + ", boite_de_vitesse=" + boite_de_vitesse + ", carburant=" + carburant + ", couleur="
-                + couleur + ", kilometrage=" + kilometrage + ", annee=" + annee + ", puissance=" + puissance + "]";
-    }
-
-    public Caracteristique() {
-    }
-
-    public Caracteristique(Voiture voiture, Moteur moteur, Boite_de_Vitesse boite_de_vitesse, Carburant carburant,
-            Couleur couleur, double kilometrage, int annee, int puissance) {
-        this.voiture = voiture;
-        this.moteur = moteur;
-        this.boite_de_vitesse = boite_de_vitesse;
-        this.carburant = carburant;
-        this.couleur = couleur;
-        this.kilometrage = kilometrage;
-        this.annee = annee;
-        this.puissance = puissance;
-    }
+    int annee;
+    int puissance;
+    
 
     double kilometrage;
 
@@ -132,7 +102,5 @@ public class Caracteristique {
         this.puissance = puissance;
     }
 
-    int annee;
-    int puissance;
 
 }
