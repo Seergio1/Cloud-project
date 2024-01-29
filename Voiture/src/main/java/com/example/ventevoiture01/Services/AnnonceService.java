@@ -144,17 +144,7 @@ public class AnnonceService {
         }
     }
 
-    /*
-     * public Annonce valider(int id) {
-     * Optional<Annonce> existingAnnonce = annonceRepository.findById(id);
-     * 
-     * if (existingAnnonce.isPresent()) {
-     * Annonce annonce = existingAnnonce.get();
-     * annonce.setStatus_voiture(statusVoiture);
-     * return annonceRepository.save(annonce);
-     * } else {
-     * return null;
-     * }
-     * }
-     */
+    public Annonce valider(int id) {
+            return annonceRepository.valider(id);
+      }
 }
