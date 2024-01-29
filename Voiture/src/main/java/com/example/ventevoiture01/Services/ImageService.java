@@ -39,7 +39,7 @@ public class ImageService {
         imageRepository.deleteById(id);
     }
 
-    public List<Image> getImagesByIdAnnonce(int idVoiture) {
-        return imageRepository.findByIdVoiture(idVoiture);
+    public List<Image> getImagesByIdAnnonce(int idAnnonce) {
+        return imageRepository.findByIdAnnonce(idAnnonce);
     }
 }
