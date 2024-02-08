@@ -21,6 +21,16 @@ public class Annonce {
     String etat_annonce;
     LocalDateTime validation_annonce;
     String status_voiture;
+    LocalDateTime date_de_vente;
+
+    public LocalDateTime getDate_de_vente() {
+        return date_de_vente;
+    }
+
+    public void setDate_de_vente(LocalDateTime date_de_vente) {
+        this.date_de_vente = date_de_vente;
+    }
+
     Date date;
 
     public void valider_annonce() {
