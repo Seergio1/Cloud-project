@@ -49,6 +49,7 @@ create table annonce(
     etat_annonce varchar(255),
     validation_annonce timestamp without time zone,
     status_voiture varchar(255),
+    date_de_vente timestamp without time zone,
     date date,
     foreign key(id_employer) references employer(id),
     foreign key(id_voiture) references voiture(id)
