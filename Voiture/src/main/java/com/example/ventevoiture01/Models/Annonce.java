@@ -1,26 +1,34 @@
 package com.example.ventevoiture01.Models;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
 @Entity
-    public class Annonce {
-        @Id
-        @GeneratedValue(strategy = GenerationType.SEQUENCE)
-        int id_annonce;
-        @ManyToOne
-        @JoinColumn(name = "id_voiture")
-        Voiture voiture;
-        @ManyToOne
-        @JoinColumn(name = "id_employer")
-        Employer employer;
-        String description;
-        String etat_annonce;
-        String status_voiture;
-        Date date;
+public class Annonce {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    int id_annonce;
+    @ManyToOne
+    @JoinColumn(name = "id_voiture")
+    Voiture voiture;
+    @ManyToOne
+    @JoinColumn(name = "id_employer")
+    Employer employer;
+    String description;
+    String etat_annonce;
+    LocalDateTime validation_annonce;
+    String status_voiture;
+    Date date;
 
-    public Annonce(int id_annonce, Voiture voiture, Employer employer, String description, String etat_annonce, String status_voiture, Date date) {
+    public void valider_annonce() {
+        this.validation_annonce = LocalDateTime.now();
+    }
+
+    public Annonce(int id_annonce, Voiture voiture, Employer employer, String description, String etat_annonce,
+            String status_voiture, Date date) {
         this.id_annonce = id_annonce;
         this.voiture = voiture;
         this.employer = employer;
@@ -30,7 +38,8 @@ import jakarta.persistence.*;
         this.date = date;
     }
 
-    public Annonce(Voiture voiture, Employer employer, String description, String etat_annonce, String status_voiture, Date date) {
+    public Annonce(Voiture voiture, Employer employer, String description, String etat_annonce, String status_voiture,
+            Date date) {
         this.voiture = voiture;
         this.employer = employer;
         this.description = description;
