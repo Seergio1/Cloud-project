@@ -106,4 +106,12 @@ public class Annonce {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public LocalDateTime getValidation_annonce() {
+        return validation_annonce;
+    }
+
+    public void setValidation_annonce(LocalDateTime validation_annonce) {
+        this.validation_annonce = validation_annonce;
+    }
 }
