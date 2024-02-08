@@ -1,5 +1,7 @@
 package com.example.ventevoiture01.Repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,9 +15,10 @@ import java.util.List;
 @Repository
 public interface AnnonceFavorisJPA extends JpaRepository<Annonce_Favoris, Integer> {
   @Query(value = "SELECT a, COUNT(*) AS favorisCount " +
-            "FROM Annonce_Favoris af " +
-            "JOIN af.annonce a " +
-            "GROUP BY a " +
-            "ORDER BY favorisCount DESC LIMIT 3")
-    List<Object[]> countFavorisByAnnonce();
+      "FROM Annonce_Favoris af " +
+      "JOIN af.annonce a " +
+      "GROUP BY a " +
+      "ORDER BY favorisCount DESC LIMIT 3")
+  List<Object[]> countFavorisByAnnonce();
+
 }

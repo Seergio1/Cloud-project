@@ -8,6 +8,8 @@ import com.example.ventevoiture01.Repository.*;
 import com.example.ventevoiture01.Services.AnnonceService;
 import com.example.ventevoiture01.Services.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +24,19 @@ public class AnnonceController {
 
     @Autowired
     private AnnonceService annonceService;
+    @Autowired
+    AnnonceJPA annonceJPA;
 
     @GetMapping("/annonces")
     public List<Annonce> getAllAnnonces() {
         return annonceService.getAllAnnonces();
+    }
+
+    @GetMapping("/annonces/{page}/{size}")
+    public Page<Annonce> getAnnonce(@PathVariable int page,
+            @PathVariable int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return annonceJPA.findAll(pageRequest);
     }
 
     @GetMapping("/annonce/{id}")
@@ -55,13 +66,13 @@ public class AnnonceController {
     }
 
     @PutMapping("/annonce/valider/{id}")
-    public ResponseEntity<Annonce> valider(@PathVariable int id){
+    public ResponseEntity<Annonce> valider(@PathVariable int id) {
         annonceService.valider(id);
         Optional<Annonce> annonce = annonceService.getAnnonceById(id);
-       return annonce.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+        return annonce.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
+
     @Autowired
     private EmployerService employerService;
 
@@ -88,10 +99,10 @@ public class AnnonceController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
+
     @Autowired
     EmployerRepository employeeRepository;
-    
+
     @PostMapping("annonce/favoris/create/utilisateur/{utilisateurId}")
     public void insertAnnonceFavorisByUtilisateur(@RequestBody Annonce annonce,
             @PathVariable long utilisateurId) throws Exception {

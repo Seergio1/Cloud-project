@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class AnnonceService {
 
@@ -42,7 +41,7 @@ public class AnnonceService {
             updatedAnnonce.setId_annonce(id);
             return annonceRepository.save(updatedAnnonce);
         } else {
-            
+
             return null;
         }
     }
@@ -105,7 +104,7 @@ public class AnnonceService {
         }
         return result;
     }
-    
+
     @Autowired
     AnnonceFavorisJPA annonceFavorisJPA;
 
@@ -126,7 +125,7 @@ public class AnnonceService {
                 .map(result -> new MeilleureAnnonce((Annonce) result[0], (Long) result[1]))
                 .collect(Collectors.toList());
     }
-    
+
     public Annonce_Favoris createAnnonceFavoris(Annonce annonce, Employer employer) {
         Annonce_Favoris annonceFavoris = new Annonce_Favoris(annonce, employer);
         return annonceFavorisJPA.save(annonceFavoris);
@@ -145,6 +144,6 @@ public class AnnonceService {
     }
 
     public void valider(int id) {
-            annonceRepository.valider(id);
-      }
+        annonceRepository.valider(id);
+    }
 }
