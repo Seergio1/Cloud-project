@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -137,6 +138,7 @@ public class AnnonceService {
         if (existingAnnonce.isPresent()) {
             Annonce annonce = existingAnnonce.get();
             annonce.setStatus_voiture(statusVoiture);
+            annonce.setDate_de_vente(LocalDateTime.now());
             return annonceRepository.save(annonce);
         } else {
             return null;
@@ -145,5 +147,6 @@ public class AnnonceService {
 
     public void valider(int id) {
         annonceRepository.valider(id);
+        annonceRepository.date_validation(id, LocalDateTime.now());
     }
 }
