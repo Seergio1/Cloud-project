@@ -102,3 +102,8 @@ create table vente(
     foreign key(id_vendeur) references employer(id),
     foreign key(id_client) references employer(id)
 );
+create table commission_pourcentage(
+     id serial primary key,
+     pourcentage double precision,
+     date timestamp without time zone
+);
