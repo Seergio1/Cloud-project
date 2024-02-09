@@ -146,4 +146,18 @@ public class AnnonceController {
         ArrayList annonces = annonceService.getVoitureVendusByModele();
         return new ResponseEntity<>(annonces, HttpStatus.OK);
     }
+
+    @GetMapping("/annonces/{mot}")
+    public ArrayList<Annonce> getAnnoncesRecherche(@PathVariable String mot) {
+        List<Annonce> annonces = annonceService.getAllAnnonces();
+        ArrayList<Annonce> result = new ArrayList<Annonce>();
+        for (Annonce annonce : annonces) {
+            if (annonce.getVoiture().getCategorie().getNom().toLowerCase().contains(mot)
+                    || annonce.getVoiture().getMarque().getNom().toLowerCase().contains(mot)
+                    || annonce.getVoiture().getModele().getNom().toLowerCase().contains(mot)) {
+                result.add(annonce);
+            }
+        }
+        return result;
+    }
 }
