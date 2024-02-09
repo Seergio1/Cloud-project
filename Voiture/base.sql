@@ -108,3 +108,8 @@ create table commission_pourcentage(
      pourcentage double precision,
      date timestamp without time zone
 );
+create table couleur(
+    id serial primary key,
+    nom varchar(255)
+);
+
