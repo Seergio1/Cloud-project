@@ -9,11 +9,12 @@ import com.example.ventevoiture01.Services.AnnonceService;
 import com.example.ventevoiture01.Services.CaracteristiqueService;
 import com.example.ventevoiture01.Services.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class AnnonceController {
 
     @GetMapping("/annonces/{page}/{size}")
     public Page<Annonce> getAnnonce(@PathVariable int page,
-            @PathVariable int size) {
+                                    @PathVariable int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
         return annonceJPA.findAll(pageRequest);
     }
@@ -67,13 +68,13 @@ public class AnnonceController {
     }
 
     @PutMapping("/annonce/valider/{id}")
-    public ResponseEntity<Annonce> valider(@PathVariable int id) {
+    public ResponseEntity<Annonce> valider(@PathVariable int id){
         annonceService.valider(id);
         Optional<Annonce> annonce = annonceService.getAnnonceById(id);
-        return annonce.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+       return annonce.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
+    
     @Autowired
     private EmployerService employerService;
 
@@ -90,33 +91,30 @@ public class AnnonceController {
     }
 
     @GetMapping("/annonce/favoris/utilisateur/{utilisateurId}")
-    public ResponseEntity<List<Annonce_Favoris>> getAnnonceFavorisByUtilisateur(@PathVariable long utilisateurId) {
+    public ResponseEntity<List<Annonce>> getAnnonceFavorisByUtilisateur(@PathVariable long utilisateurId) {
         Optional<Employer> utilisateur = employerService.getEmployerById(utilisateurId);
 
         if (utilisateur.isPresent()) {
-            List<Annonce_Favoris> annoncesFavoris = annonceService.getAnnonceFavorisByUtilisateur(utilisateur.get());
+            List<Annonce> annoncesFavoris = annonceService.getAnnonceFavorisByUtilisateur(utilisateur.get());
             return new ResponseEntity<>(annoncesFavoris, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    
     @Autowired
     EmployerRepository employeeRepository;
-
-    @PostMapping("annonce/favoris/create/utilisateur/{utilisateurId}")
-    public void insertAnnonceFavorisByUtilisateur(@RequestBody Annonce annonce,
-            @PathVariable long utilisateurId) throws Exception {
-
+    
+    @PostMapping("annonce/favoris/create")
+    public void insertAnnonceFavorisByUtilisateur(@RequestBody Annonce_Favoris annonce ) {
         try {
-            Employer utilisateur = employeeRepository.getEmployerById(utilisateurId);
-
-            Annonce_Favoris createdAnnonce = annonceService.createAnnonceFavoris(annonce, utilisateur);
+            Annonce_Favoris createdAnnonce = annonceService.createAnnonceFavoris(annonce);
         } catch (Exception e) {
             new Exception("insert failed: " + e.getMessage());
         }
 
     }
+
 
     @GetMapping("/annonce/meilleure")
     public List<MeilleureAnnonce> countFavorisByAnnonce() {
@@ -167,8 +165,8 @@ public class AnnonceController {
 
     @GetMapping("/annonces/select/{modele}/{categorie}/{marque}/{couleur}/{prixmin}/{prixmax}")
     public ArrayList<Annonce> getAnnoncesSelect(@PathVariable String modele, @PathVariable String categorie,
-            @PathVariable String marque, @PathVariable int couleur, @PathVariable String prixmin,
-            @PathVariable String prixmax) {
+                                                @PathVariable String marque, @PathVariable int couleur, @PathVariable String prixmin,
+                                                @PathVariable String prixmax) {
         List<Annonce> annonces = annonceService.getAllAnnonces();
         ArrayList<Annonce> result = new ArrayList<Annonce>();
         ArrayList<Annonce> result2 = new ArrayList<Annonce>();
@@ -243,5 +241,4 @@ public class AnnonceController {
         return result5;
 
     }
-
 }
