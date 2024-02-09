@@ -109,12 +109,12 @@ public class AnnonceService {
     @Autowired
     AnnonceFavorisJPA annonceFavorisJPA;
 
-    public List<Annonce_Favoris> getAnnonceFavorisByUtilisateur(Employer employer) {
-        List<Annonce_Favoris> result = new ArrayList<Annonce_Favoris>();
+    public List<Annonce> getAnnonceFavorisByUtilisateur(Employer employer) {
+        List<Annonce> result = new ArrayList();
         List<Annonce_Favoris> annonces = annonceFavorisJPA.findAll();
         for (Annonce_Favoris ann : annonces) {
             if (ann.getEmployer().getId() == employer.getId()) {
-                result.add(ann);
+                result.add(ann.getAnnonce());
             }
         }
         return result;
@@ -127,9 +127,8 @@ public class AnnonceService {
                 .collect(Collectors.toList());
     }
     
-    public Annonce_Favoris createAnnonceFavoris(Annonce annonce, Employer employer) {
-        Annonce_Favoris annonceFavoris = new Annonce_Favoris(annonce, employer);
-        return annonceFavorisJPA.save(annonceFavoris);
+     public Annonce_Favoris createAnnonceFavoris(Annonce_Favoris annonce) {
+        return annonceFavorisJPA.save(annonce);
     }
 
     public Annonce updateStatusVoiture(int id, String statusVoiture) {
