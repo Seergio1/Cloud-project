@@ -78,11 +78,11 @@ public class AnnonceController {
     }
 
     @GetMapping("/annonce/favoris/utilisateur/{utilisateurId}")
-    public ResponseEntity<List<Annonce_Favoris>> getAnnonceFavorisByUtilisateur(@PathVariable long utilisateurId) {
+    public ResponseEntity<List<Annonce>> getAnnonceFavorisByUtilisateur(@PathVariable long utilisateurId) {
         Optional<Employer> utilisateur = employerService.getEmployerById(utilisateurId);
 
         if (utilisateur.isPresent()) {
-            List<Annonce_Favoris> annoncesFavoris = annonceService.getAnnonceFavorisByUtilisateur(utilisateur.get());
+            List<Annonce> annoncesFavoris = annonceService.getAnnonceFavorisByUtilisateur(utilisateur.get());
             return new ResponseEntity<>(annoncesFavoris, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
