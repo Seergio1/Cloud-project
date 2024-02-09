@@ -13,11 +13,12 @@ import com.example.ventevoiture01.Repository.ModeleJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Collectors;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class AnnonceService {
@@ -42,7 +43,7 @@ public class AnnonceService {
             updatedAnnonce.setId_annonce(id);
             return annonceRepository.save(updatedAnnonce);
         } else {
-
+            
             return null;
         }
     }
@@ -105,16 +106,16 @@ public class AnnonceService {
         }
         return result;
     }
-
+    
     @Autowired
     AnnonceFavorisJPA annonceFavorisJPA;
 
-    public List<Annonce_Favoris> getAnnonceFavorisByUtilisateur(Employer employer) {
-        List<Annonce_Favoris> result = new ArrayList<Annonce_Favoris>();
+    public List<Annonce> getAnnonceFavorisByUtilisateur(Employer employer) {
+        List<Annonce> result = new ArrayList();
         List<Annonce_Favoris> annonces = annonceFavorisJPA.findAll();
         for (Annonce_Favoris ann : annonces) {
             if (ann.getEmployer().getId() == employer.getId()) {
-                result.add(ann);
+                result.add(ann.getAnnonce());
             }
         }
         return result;
@@ -126,10 +127,9 @@ public class AnnonceService {
                 .map(result -> new MeilleureAnnonce((Annonce) result[0], (Long) result[1]))
                 .collect(Collectors.toList());
     }
-
-    public Annonce_Favoris createAnnonceFavoris(Annonce annonce, Employer employer) {
-        Annonce_Favoris annonceFavoris = new Annonce_Favoris(annonce, employer);
-        return annonceFavorisJPA.save(annonceFavoris);
+    
+     public Annonce_Favoris createAnnonceFavoris(Annonce_Favoris annonce) {
+        return annonceFavorisJPA.save(annonce);
     }
 
     public Annonce updateStatusVoiture(int id, String statusVoiture) {
@@ -138,7 +138,6 @@ public class AnnonceService {
         if (existingAnnonce.isPresent()) {
             Annonce annonce = existingAnnonce.get();
             annonce.setStatus_voiture(statusVoiture);
-            annonce.setDate_de_vente(LocalDateTime.now());
             return annonceRepository.save(annonce);
         } else {
             return null;
