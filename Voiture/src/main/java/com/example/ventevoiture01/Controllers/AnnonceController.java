@@ -92,19 +92,16 @@ public class AnnonceController {
     @Autowired
     EmployerRepository employeeRepository;
     
-    @PostMapping("annonce/favoris/create/utilisateur/{utilisateurId}")
-    public void insertAnnonceFavorisByUtilisateur(@RequestBody Annonce annonce,
-            @PathVariable long utilisateurId) throws Exception {
-
+    @PostMapping("annonce/favoris/create")
+    public void insertAnnonceFavorisByUtilisateur(@RequestBody Annonce_Favoris annonce ) {
         try {
-            Employer utilisateur = employeeRepository.getEmployerById(utilisateurId);
-
-            Annonce_Favoris createdAnnonce = annonceService.createAnnonceFavoris(annonce, utilisateur);
+            Annonce_Favoris createdAnnonce = annonceService.createAnnonceFavoris(annonce);
         } catch (Exception e) {
             new Exception("insert failed: " + e.getMessage());
         }
 
     }
+
 
     @GetMapping("/annonce/meilleure")
     public List<MeilleureAnnonce> countFavorisByAnnonce() {
